@@ -11,6 +11,11 @@ import (
 const path = "./enclave/enclave_data.txt"
 
 func main() {
+	// We create the enclave data file, if it doesn't already exist.
+	f, err := os.OpenFile(path, os.O_CREATE, 0o644)
+	f.Close()
+	check(err)
+
 	// We read the current value stored in the file, defaulting to zero.
 	sealedContents, err := os.ReadFile(path)
 	check(err)
