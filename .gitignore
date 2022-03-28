@@ -1,6 +1,5 @@
 .idea/
-# The mount for external enclave data.
-enclave/
+enclave/enclave_data.txt
 main/main
 main/public.pem
 main/private.pem

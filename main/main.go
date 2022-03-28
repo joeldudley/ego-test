@@ -7,20 +7,9 @@ import (
 	"strconv"
 )
 
-const (
-	dir      = "./enclave"
-	filename = "enclave_data.txt"
-)
+const path = "./enclave/enclave_data.txt"
 
 func main() {
-	path := fmt.Sprintf("%s/%s", dir, filename)
-
-	// We create the file and its parent directories.
-	check(os.MkdirAll(dir, 0770))
-	f, err := os.OpenFile(path, os.O_CREATE, 0644)
-	f.Close()
-	check(err)
-
 	// We read the current value stored in the file, defaulting to zero.
 	sealedContents, err := os.ReadFile(path)
 	check(err)
