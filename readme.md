@@ -11,7 +11,8 @@ exist), unseals and increments it, then seals and rewrites it to disk.
 
 # How to run it
 
-1. Update `main/enclave.json`
+1. Update `main/enclave.json` so that the mount's source points to the `enclave/` directory in this repo
 2. Step into the `main` folder: `cd main`
 3. Build and sign the binary with EGo: `ego-go build && ego sign main`
 4. Run the binary with EGo in simulation mode: `OE_SIMULATION=1 ego run main`
+5. 
