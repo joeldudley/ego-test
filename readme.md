@@ -1,5 +1,3 @@
-This projects shows how to create a read and write to a persistent sealed file with EGo.
-
 # How it works
 
 A counter is stored, sealed by the enclave, in `enclave/enclave_data.txt`. Because the counter is sealed, it cannot be 
