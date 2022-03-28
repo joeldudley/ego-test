@@ -15,4 +15,3 @@ exist), unseals and increments it, then seals and rewrites it to disk.
 2. Step into the `main` folder: `cd main`
 3. Build and sign the binary with EGo: `ego-go build && ego sign main`
 4. Run the binary with EGo in simulation mode: `OE_SIMULATION=1 ego run main`
-5. 
