@@ -8,7 +8,7 @@
  "securityVersion": 1,
  "mounts": [
   {
-   "source": "home/joeldudley/Desktop/ego-test/enclave",
+   "source": "/home/joeldudley/Desktop/ego-test/enclave",
    "target": "/enclave",
    "type": "hostfs",
    "readOnly": false
