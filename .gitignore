@@ -1,4 +1,5 @@
 .idea/
+enclave/
 main/main
 main/public.pem
 main/private.pem
