@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/edgelesssys/ego/ecrypto"
 	"os"
 	"strconv"
+
+	"github.com/edgelesssys/ego/ecrypto"
 )
 
 const path = "./enclave/enclave_data.txt"
@@ -27,7 +28,7 @@ func main() {
 	updatedValue := []byte(strconv.FormatUint(value+1, 10))
 	sealedContents, err = ecrypto.SealWithUniqueKey(updatedValue, nil)
 	check(err)
-	check(os.WriteFile(path, sealedContents, 0644))
+	check(os.WriteFile(path, sealedContents, 0o644))
 
 	// We read back and print the value.
 	sealedContents, err = os.ReadFile(path)
