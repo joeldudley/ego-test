@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/edgelesssys/ego/ecrypto"
 	"os"
 	"strconv"
 )
@@ -12,31 +13,32 @@ const (
 )
 
 func main() {
-	var err error
-	var f *os.File
-	var contents []byte
-	var value uint64
-
 	path := fmt.Sprintf("%s/%s", dir, filename)
 
 	// We create the file and its parent directories.
 	check(os.MkdirAll(dir, 0770))
-	f, err = os.OpenFile(path, os.O_CREATE, 0644)
+	f, err := os.OpenFile(path, os.O_CREATE, 0644)
 	f.Close()
 	check(err)
 
 	// We read the current value stored in the file.
-	contents, err = os.ReadFile(path)
+	sealedContents, err := os.ReadFile(path)
+	check(err)
+	contents, err := ecrypto.Unseal(sealedContents, nil)
 	check(err)
 
 	// We write back the value, incremented by one.
-	value, err = strconv.ParseUint(string(contents), 10, 64)
+	value, err := strconv.ParseUint(string(contents), 10, 64)
+	check(err)
 	updatedValue := []byte(strconv.FormatUint(value+1, 10))
-	check(os.WriteFile(path, updatedValue, 0644))
+	sealedContents, err = ecrypto.SealWithUniqueKey(updatedValue, nil)
+	check(err)
+	check(os.WriteFile(path, sealedContents, 0644))
 
 	// We read back and print the value.
-	contents, err = os.ReadFile(path)
+	sealedContents, err = os.ReadFile(path)
 	check(err)
+	contents, err = ecrypto.Unseal(sealedContents, nil)
 	println(fmt.Sprintf("jjj file contents: %s", contents))
 }
 
