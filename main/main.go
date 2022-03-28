@@ -21,13 +21,18 @@ func main() {
 	f.Close()
 	check(err)
 
-	// We read the current value stored in the file.
+	// We read the current value stored in the file, defaulting to zero.
 	sealedContents, err := os.ReadFile(path)
 	check(err)
-	contents, err := ecrypto.Unseal(sealedContents, nil)
-	check(err)
+	var contents []byte
+	if len(sealedContents) == 0 {
+		contents = []byte{}
+	} else {
+		contents, err = ecrypto.Unseal(sealedContents, nil)
+		check(err)
+	}
 
-	// We write back the value, incremented by one.
+	// We increment the current value by one and write it back.
 	value, err := strconv.ParseUint(string(contents), 10, 64)
 	check(err)
 	updatedValue := []byte(strconv.FormatUint(value+1, 10))
