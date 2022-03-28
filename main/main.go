@@ -26,7 +26,7 @@ func main() {
 	check(err)
 	var contents []byte
 	if len(sealedContents) == 0 {
-		contents = []byte{}
+		contents = []byte("0")
 	} else {
 		contents, err = ecrypto.Unseal(sealedContents, nil)
 		check(err)
