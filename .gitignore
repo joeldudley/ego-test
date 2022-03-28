@@ -1,4 +1,5 @@
 .idea/
+enclave.json
 enclave/enclave_data.txt
 main/main
 main/public.pem
