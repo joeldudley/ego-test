@@ -31,6 +31,8 @@ func main() {
 	value, err := strconv.ParseUint(string(contents), 10, 64)
 	check(err)
 	updatedValue := []byte(strconv.FormatUint(value+1, 10))
+	// We seal the contents with a key that's tied to the measurement of the enclave. We can choose to seal with a
+	// product key instead.
 	sealedContents, err = ecrypto.SealWithUniqueKey(updatedValue, nil)
 	check(err)
 	check(os.WriteFile(path, sealedContents, 0o644))
